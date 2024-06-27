@@ -1,15 +1,13 @@
 package dev.kjaehyeok21.profile_website.entities;
 
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,11 +17,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-@EnableR2dbcAuditing
-@Entity
+@EnableRedisRepositories
+@RedisHash
 public class GithubRepository {
 
-    @Id
+    @org.springframework.data.annotation.Id
     private UUID id;
 
     @NotNull
@@ -31,12 +29,12 @@ public class GithubRepository {
     private String repoName;
 
     @org.hibernate.validator.constraints.URL
-    private URL repoUrl;
+    private String repoUrl;
     private String description;
 
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 }

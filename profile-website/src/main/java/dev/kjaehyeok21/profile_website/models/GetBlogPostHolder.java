@@ -2,8 +2,8 @@ package dev.kjaehyeok21.profile_website.models;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
 
 import jakarta.validation.constraints.NotBlank;
@@ -24,9 +24,9 @@ public class GetBlogPostHolder {
     private String title;
     private String markdownContent;
 
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 }

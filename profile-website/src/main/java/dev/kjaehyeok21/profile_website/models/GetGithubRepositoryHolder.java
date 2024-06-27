@@ -3,8 +3,8 @@ package dev.kjaehyeok21.profile_website.models;
 import java.net.URL;
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
 
 import lombok.AllArgsConstructor;
@@ -20,9 +20,9 @@ public class GetGithubRepositoryHolder {
     private URL repoUrl;
     private String description;
 
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 }

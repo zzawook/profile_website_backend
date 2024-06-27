@@ -1,11 +1,12 @@
 package dev.kjaehyeok21.profile_website.repositories;
-
 import java.util.UUID;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import dev.kjaehyeok21.profile_website.entities.GithubRepository;
 
-public interface GitHubRepositoryRepository extends ReactiveCrudRepository<GithubRepository, UUID>{
+
+@Repository
+public interface GitHubRepositoryRepository extends CrudRepository<GithubRepository, UUID> {
     
 }

@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS blog_posts;
+
+CREATE TABLE blog_posts (
+    id VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    markdown_content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

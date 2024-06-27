@@ -1,5 +1,7 @@
 package dev.kjaehyeok21.profile_website.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -7,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import dev.kjaehyeok21.profile_website.models.GetGithubRepositoryHolder;
 import dev.kjaehyeok21.profile_website.services.GithubRepositoryService;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
-
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class GithubRepositoryController {
     private GithubRepositoryService repoService;
     
     @GetMapping(GITHUB_REPOSITORY_DEFAULT_PATH)
-    public Flux<GetGithubRepositoryHolder> getRepositoryList(@RequestParam String param) {
+    public List<GetGithubRepositoryHolder> getRepositoryList(@RequestParam String param) {
         return repoService.getRepositoryList();
     }
     
