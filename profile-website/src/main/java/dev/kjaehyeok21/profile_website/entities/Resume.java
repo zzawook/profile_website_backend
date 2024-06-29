@@ -1,17 +1,16 @@
-package dev.kjaehyeok21.profile_website.bootstrap;
+package dev.kjaehyeok21.profile_website.entities;
 
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 
 @Component
-public class BootStrap implements CommandLineRunner{
+public class Resume {
 
     @Autowired
     S3Client s3client;
@@ -19,11 +18,10 @@ public class BootStrap implements CommandLineRunner{
     @Value("S${spring.cloud.aws.s3.bucket}")
     private String bucket;
 
-    @Override
-    public void run(String... args) throws Exception {
-        populateGithubRepoData();
-        URL resumeUrl = getResumeUrl();
-        
+    URL url;
+
+    public Resume() {
+        this.url = this.getResumeUrl();
     }
 
     private URL getResumeUrl() {
@@ -35,7 +33,11 @@ public class BootStrap implements CommandLineRunner{
         return s3client.utilities().getUrl(getUrlRequest);
     }
 
-    private void populateGithubRepoData() {
+    public URL getURL() {
+        return this.url;
+    }
 
+    public void setURL(URL newUrl) {
+        this.url = newUrl;
     }
 }

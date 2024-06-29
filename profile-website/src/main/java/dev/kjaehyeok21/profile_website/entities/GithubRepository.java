@@ -1,9 +1,9 @@
 package dev.kjaehyeok21.profile_website.entities;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
@@ -21,8 +21,8 @@ import lombok.Data;
 @RedisHash
 public class GithubRepository {
 
-    @org.springframework.data.annotation.Id
-    private UUID id;
+    @Id
+    private Integer id;
 
     @NotNull
     @NotBlank

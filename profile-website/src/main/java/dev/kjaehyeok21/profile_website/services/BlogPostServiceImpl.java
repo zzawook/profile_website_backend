@@ -1,7 +1,6 @@
 package dev.kjaehyeok21.profile_website.services;
 
-import java.util.UUID;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.kjaehyeok21.profile_website.entities.BlogPost;
@@ -17,7 +16,10 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class BlogPostServiceImpl implements BlogPostService{
 
+    @Autowired
     BlogPostRepository blogPostRepository;
+
+    @Autowired
     BlogPostMapper blogPostMapper;
 
     @Override
@@ -26,19 +28,19 @@ public class BlogPostServiceImpl implements BlogPostService{
     }
 
     @Override
-    public Mono<GetBlogPostHolder> getBlogPost(UUID id) {
+    public Mono<GetBlogPostHolder> getBlogPost(Integer id) {
         return blogPostRepository.findById(id).map(blogPost -> blogPostMapper.blogPostToGetBlogHolder(blogPost));
     }
 
     @Override
-    public Mono<UUID> createBlogPost(PostBlogPostHolder newBlog) {
+    public Mono<Integer> createBlogPost(PostBlogPostHolder newBlog) {
         Mono<BlogPost> addedBlogPost = blogPostRepository.save(blogPostMapper.postBlogHolderToBlogPost(newBlog));
 
         return addedBlogPost.map(blogPost -> blogPost.getId());
     }
 
     @Override
-    public Mono<UUID> updateBlogPost(UUID id, PostBlogPostHolder updateBlog) {
+    public Mono<Integer> updateBlogPost(Integer id, PostBlogPostHolder updateBlog) {
         Mono<BlogPost> blogPostToUpdate = blogPostRepository.findById(id);
 
         return blogPostToUpdate.map(blogPost -> {
@@ -50,7 +52,7 @@ public class BlogPostServiceImpl implements BlogPostService{
     }
 
     @Override
-    public Mono<UUID> deleteBlogPost(UUID id) {
+    public Mono<Integer> deleteBlogPost(Integer id) {
         Mono<BlogPost> blogPostToDelete = blogPostRepository.findById(id);
 
         return blogPostToDelete.map(blogPost -> blogPost.getId());

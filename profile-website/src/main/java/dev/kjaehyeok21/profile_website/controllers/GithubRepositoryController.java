@@ -2,24 +2,25 @@ package dev.kjaehyeok21.profile_website.controllers;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import dev.kjaehyeok21.profile_website.models.GetGithubRepositoryHolder;
 import dev.kjaehyeok21.profile_website.services.GithubRepositoryService;
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class GithubRepositoryController {
 
-    private final String GITHUB_REPOSITORY_DEFAULT_PATH = "/api/v1/repos";
+    public static final String GITHUB_REPOSITORY_DEFAULT_PATH = "/api/v1/repos";
 
+    @Autowired
     private GithubRepositoryService repoService;
     
     @GetMapping(GITHUB_REPOSITORY_DEFAULT_PATH)
-    public List<GetGithubRepositoryHolder> getRepositoryList(@RequestParam String param) {
+    public List<GetGithubRepositoryHolder> getRepositoryList() {
         return repoService.getRepositoryList();
     }
     

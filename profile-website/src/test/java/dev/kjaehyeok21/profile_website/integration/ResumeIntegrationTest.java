@@ -1,4 +1,4 @@
-package dev.kjaehyeok21.profile_website.controllers;
+package dev.kjaehyeok21.profile_website.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import dev.kjaehyeok21.profile_website.controllers.ResumeController;
+
 @WebMvcTest(ResumeController.class)
-public class ResumeControllerTest {
+public class ResumeIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
