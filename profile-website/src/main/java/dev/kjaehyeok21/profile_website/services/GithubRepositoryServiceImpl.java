@@ -22,6 +22,13 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
     @Autowired
     GithubRepositoryMapper githubRepositoryMapper;
 
+    public GithubRepositoryServiceImpl(GitHubRepositoryRepository gitHubRepositoryRepository, GithubRepositoryMapper githubRepositoryMapper) {
+        this.gitHubRepositoryRepository = gitHubRepositoryRepository;
+        this.githubRepositoryMapper = githubRepositoryMapper;
+
+        // TODO Logic to intialize by populating github repo data
+    }
+
     @Override
     public List<GetGithubRepositoryHolder> getRepositoryList() {
         Iterable<GithubRepository> githubRepos = gitHubRepositoryRepository.findAll();

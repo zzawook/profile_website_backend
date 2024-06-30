@@ -6,23 +6,22 @@ import org.springframework.context.annotation.Configuration;
 import lombok.RequiredArgsConstructor;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 
 @Configuration
 @RequiredArgsConstructor
-public class S3Config {
+public class SecretsManagerConfig {
 
-    private Region region = Region.of("ap-southeast-1");
+    Region region = Region.of("ap-southeast-1");
 
     private final AwsCredentials awsCredentials;
 
+    // Create a Secrets Manager client
     @Bean
-    S3Client s3Client(){
-        return S3Client.builder()
-                .credentialsProvider(() -> awsCredentials)
-                .region(region)
-                .build();
+    SecretsManagerClient secretsManagerClient() {
+        return SecretsManagerClient.builder()
+            .region(region)
+            .credentialsProvider(() -> awsCredentials)
+            .build();
     }
-
-    
 }

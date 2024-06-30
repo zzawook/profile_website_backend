@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,12 +22,13 @@ public class ResumeServiceImpl implements ResumeService {
 
     S3Client s3Client;
 
-    @Value("S${spring.cloud.aws.s3.bucket}")
-    private String bucket;
+    private final String bucket = "kjaehyeok21";
 
     public ResumeServiceImpl(Resume resume, S3Client client) {
         this.resume = resume;
         this.s3Client = client;
+
+        //TODO: Logic to intialize by populating the resume URL
     }
 
     @Override
