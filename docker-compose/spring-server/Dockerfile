@@ -18,10 +18,10 @@ WORKDIR /app/profile-website
 RUN chmod +x mvnw
 
 # Build the Spring Boot project
-RUN ./mvnw clean package
+RUN ./mvnw clean package -Dmaven.test.skip
 
 # Expose the port on which the Spring Boot application will run
 EXPOSE 8080
 
 # Run the Spring Boot application
-CMD ["java", "-jar", "target/<jar_file_name>.jar"]
+CMD ["java", "-jar", "target/profile-website-*.jar"]
