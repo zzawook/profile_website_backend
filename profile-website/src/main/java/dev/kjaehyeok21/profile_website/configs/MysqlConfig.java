@@ -42,14 +42,9 @@ public class MysqlConfig {
 
     @Bean
     ConnectionFactory connectionFactory() {
-        return ConnectionFactories.get(ConnectionFactoryOptions.builder()
-            .option(ConnectionFactoryOptions.DRIVER, "mysql")
-            .option(ConnectionFactoryOptions.HOST, mysqlEndpoint)
-            .option(ConnectionFactoryOptions.PORT, 3306)
-            .option(ConnectionFactoryOptions.USER, this.username)
-            .option(ConnectionFactoryOptions.PASSWORD, this.password)
-            .option(ConnectionFactoryOptions.DATABASE, this.dbName)
-            .build());
+        String dbUrl = "r2dbcs:mysql://" + this.username + ":" + this.password + "@" + this.mysqlEndpoint + ":3306/" + this.dbName;
+        ConnectionFactoryBuilder builder = ConnectionFactoryBuilder.withUrl(dbUrl);
+        return builder.build();
     }
 
     @Bean
