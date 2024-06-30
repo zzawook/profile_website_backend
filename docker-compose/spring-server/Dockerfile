@@ -1,32 +1,27 @@
-# Use a base image with Java and Maven installed
-FROM maven:3.8.4-openjdk-11-slim AS build
+# Use an official Java runtime as the base image
+FROM ubuntu:latest
 
-# Set the working directory
+USER root
+
+RUN apt-get update && apt-get install -y git openjdk-17-jdk
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the pom.xml file
-COPY profile_website_backend/profile_website/pom.xml .
+# Clone the GitHub repository
+RUN git clone https://github.com/zzawook/profile_website_backend.git .
 
-# Download the dependencies
-RUN mvn dependency:go-offline -B
+RUN ls
 
-# Copy the source code
-COPY profile_website_backend/profile_website/src ./src
+WORKDIR /app/profile-website
 
-# Build the application
-RUN mvn package -DskipTests
+RUN chmod +x mvnw
 
-# Use a lightweight base image with Java installed
-FROM adoptopenjdk:11-jre-hotspot AS runtime
+# Build the Spring Boot project
+RUN ./mvnw clean package
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the built JAR file from the build stage
-COPY --from=build /app/target/profile_website-*.jar app.jar
-
-# Expose the port that the application listens on
+# Expose the port on which the Spring Boot application will run
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "app.jar"]
+# Run the Spring Boot application
+CMD ["java", "-jar", "target/<jar_file_name>.jar"]
