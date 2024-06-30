@@ -2,8 +2,6 @@ package dev.kjaehyeok21.profile_website.entities;
 
 import java.net.URL;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import software.amazon.awssdk.services.s3.S3Client;
