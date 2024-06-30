@@ -26,4 +26,4 @@ RUN chown -R jenkins:jenkins /usr/share/jenkins/ref/
 USER jenkins
 
 # Start Jenkins
-CMD ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
+# CMD ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]

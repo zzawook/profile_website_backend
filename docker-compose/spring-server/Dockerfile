@@ -1,8 +1,6 @@
 # Use an official Java runtime as the base image
 FROM ubuntu:latest
 
-USER root
-
 RUN apt-get update && apt-get install -y git openjdk-17-jdk
 
 # Set the working directory in the container
@@ -23,5 +21,11 @@ RUN ./mvnw clean package -Dmaven.test.skip
 # Expose the port on which the Spring Boot application will run
 EXPOSE 8080
 
+RUN pwd
+
+RUN chmod +x target/profile-website-*.jar
+
+RUN ls target
+
 # Run the Spring Boot application
-CMD ["java", "-jar", "target/profile-website-*.jar"]
+ENTRYPOINT ["java", "-jar", "/app/profile-website/target/profile-website-0.0.1-SNAPSHOT.jar"]

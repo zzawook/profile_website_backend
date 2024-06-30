@@ -19,6 +19,9 @@ services:
       - 6379:6379
     networks:
       - mynetwork
+    args:
+      USERNAME: ${REDIS_USERNAME}
+      PASSWORd: ${REDIS_PASSWORD}
 
   spring-server:
     build:
