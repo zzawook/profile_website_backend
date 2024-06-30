@@ -14,7 +14,7 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 public class BootStrap implements CommandLineRunner{
 
     @Autowired
-    S3Client s3client;
+    S3Client s3Client;
 
     @Value("S${spring.cloud.aws.s3.bucket}")
     private String bucket;
@@ -32,7 +32,7 @@ public class BootStrap implements CommandLineRunner{
             .key("resume.pdf")
             .build();
 
-        return s3client.utilities().getUrl(getUrlRequest);
+        return s3Client.utilities().getUrl(getUrlRequest);
     }
 
     private void populateGithubRepoData() {

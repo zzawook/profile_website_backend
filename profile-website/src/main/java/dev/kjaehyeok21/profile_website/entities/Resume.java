@@ -12,15 +12,15 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 @Component
 public class Resume {
 
-    @Autowired
-    S3Client s3client;
+    S3Client s3Client;
 
-    @Value("S${spring.cloud.aws.s3.bucket}")
-    private String bucket;
+    // @Value("${spring.cloud.aws.s3.bucket}")
+    private final String bucket = "kjaehyeok21";
 
     URL url;
 
-    public Resume() {
+    public Resume(S3Client s3Client) {
+        this.s3Client = s3Client;
         this.url = this.getResumeUrl();
     }
 
@@ -30,7 +30,7 @@ public class Resume {
             .key("resume.pdf")
             .build();
 
-        return s3client.utilities().getUrl(getUrlRequest);
+        return s3Client.utilities().getUrl(getUrlRequest);
     }
 
     public URL getURL() {
