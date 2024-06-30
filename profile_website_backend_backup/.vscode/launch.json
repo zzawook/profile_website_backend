@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProfileWebsiteApplication<profile-website>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "dev.kjaehyeok21.profile_website.ProfileWebsiteApplication",
+            "projectName": "profile-website",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

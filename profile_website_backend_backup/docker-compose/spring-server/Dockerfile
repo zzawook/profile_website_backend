@@ -1,0 +1,27 @@
+# Use an official Java runtime as the base image
+FROM ubuntu:latest
+
+USER root
+
+RUN apt-get update && apt-get install -y git openjdk-17-jdk
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Clone the GitHub repository
+RUN git clone https://github.com/zzawook/profile_website_backend.git .
+
+RUN ls
+
+WORKDIR /app/profile-website
+
+RUN chmod +x mvnw
+
+# Build the Spring Boot project
+RUN ./mvnw clean package
+
+# Expose the port on which the Spring Boot application will run
+EXPOSE 8080
+
+# Run the Spring Boot application
+CMD ["java", "-jar", "target/<jar_file_name>.jar"]
