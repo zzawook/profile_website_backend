@@ -20,6 +20,8 @@ public class GetGithubRepositoryHolder {
     private URL repoUrl;
     private String description;
 
+    private String language;
+
     @CreatedDate
     private LocalDateTime createdAt;
 

@@ -32,6 +32,8 @@ public class GithubRepository {
     private String repoUrl;
     private String description;
 
+    private String language;
+
     @CreatedDate
     private LocalDateTime createdAt;
 
