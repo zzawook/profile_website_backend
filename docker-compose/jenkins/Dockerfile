@@ -1,8 +1,8 @@
 FROM jenkins/jenkins:latest
 
 # Set environment variables
-ENV JENKINS_OPTS=""
-ENV JAVA_OPTS=""
+# ENV JENKINS_OPTS=""
+# ENV JAVA_OPTS=""
 
 # Expose Jenkins port
 EXPOSE 8080
