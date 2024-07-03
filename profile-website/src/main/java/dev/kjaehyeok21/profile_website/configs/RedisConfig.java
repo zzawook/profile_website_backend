@@ -1,5 +1,6 @@
 package dev.kjaehyeok21.profile_website.configs;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -14,6 +15,7 @@ import dev.kjaehyeok21.profile_website.services.AwsSecretsManagerService;
 @EnableRedisRepositories
 public class RedisConfig {
 
+    @Value("${spring.data.redis.host}")
     private String host;
 
     private int port;
@@ -24,7 +26,6 @@ public class RedisConfig {
 
     public RedisConfig(AwsSecretsManagerService awsSecretsManagerService) {
         try {
-            this.host = awsSecretsManagerService.getSecret("redis_host");
             this.port = Integer.parseInt(awsSecretsManagerService.getSecret("redis_port"));
             this.username = awsSecretsManagerService.getSecret("redis_client-name");
             this.password = awsSecretsManagerService.getSecret("redis_password");

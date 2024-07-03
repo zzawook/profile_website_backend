@@ -1,6 +1,9 @@
 package dev.kjaehyeok21.profile_website.configs;
 
 
+import java.time.Duration;
+import java.time.ZoneId;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.r2dbc.ConnectionFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +14,7 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 
 import dev.kjaehyeok21.profile_website.services.AwsSecretsManagerService;
 import io.r2dbc.spi.ConnectionFactory;
+import io.r2dbc.spi.ConnectionFactoryOptions;
 
 @Configuration
 public class MysqlConfig {
@@ -40,9 +44,16 @@ public class MysqlConfig {
 
     @Bean
     ConnectionFactory connectionFactory() {
-        String dbUrl = "r2dbcs:mysql://" + this.username + ":" + this.password + "@" + this.mysqlEndpoint + ":3306/" + this.dbName;
-        ConnectionFactoryBuilder builder = ConnectionFactoryBuilder.withUrl(dbUrl);
-        return builder.build();
+        System.out.println(ZoneId.systemDefault().getId());
+        return ConnectionFactoryBuilder.withOptions(
+                ConnectionFactoryOptions.builder()
+                        .option(ConnectionFactoryOptions.DRIVER, "mysql")
+                        .option(ConnectionFactoryOptions.HOST, mysqlEndpoint)
+                        .option(ConnectionFactoryOptions.USER, username)
+                        .option(ConnectionFactoryOptions.PASSWORD, password)
+                        .option(ConnectionFactoryOptions.DATABASE, dbName)
+                        .option(ConnectionFactoryOptions.CONNECT_TIMEOUT, Duration.ofSeconds(10)))
+                .build();
     }
 
     @Bean
