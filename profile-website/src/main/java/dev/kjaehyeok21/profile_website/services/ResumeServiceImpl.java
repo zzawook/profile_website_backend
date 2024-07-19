@@ -62,7 +62,7 @@ public class ResumeServiceImpl implements ResumeService {
             Path filePath = basePath.resolve(fp.filename());
 
             Mono<Void> resultMono = fp.transferTo(filePath);
-            resultMono.block();
+            resultMono.subscribe();
 
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                     .bucket(bucket)
@@ -70,6 +70,8 @@ public class ResumeServiceImpl implements ResumeService {
                     .build();
 
             s3Client.putObject(putObjectRequest, filePath);
+
+            filePath.toFile().delete();
             return Mono.just(this.resumeUrl);
         });
     }
