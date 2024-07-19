@@ -33,7 +33,8 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
         this.fetchGithubRepositoryDataFromGithub();
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    // @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 * * * * ?")
     private void fetchGithubRepositoryDataDaily() {
         this.fetchGithubRepositoryDataFromGithub();
     }
