@@ -1,9 +1,13 @@
 package dev.kjaehyeok21.profile_website.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -33,8 +37,7 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
         this.fetchGithubRepositoryDataFromGithub();
     }
 
-    // @Scheduled(cron = "0 0 0 * * ?")
-    @Scheduled(cron = "0 * * * * ?")
+     @Scheduled(cron = "0 0 0 * * ?")
     private void fetchGithubRepositoryDataDaily() {
         this.fetchGithubRepositoryDataFromGithub();
     }
@@ -42,32 +45,63 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
     private void fetchGithubRepositoryDataFromGithub() {
         WebClient webClient = WebClient.create();
         webClient.get()
-            .uri("https://api.github.com/users/kjaehyeok21/repos")
+            .uri("https://api.github.com/users/zzawook/repos")
             .retrieve()
-            .bodyToFlux(String.class)
+            .bodyToMono(String.class)
             .map(str -> {
-                JSONObject jsonObject = new JSONObject(str);
-                String id = jsonObject.getString("id");
-                String repoName = jsonObject.getString("name");
-                String repoUrl = jsonObject.getString("html_url");
-                String description = jsonObject.getString("description");
-                String createdAt = jsonObject.getString("created_at");
-                String updatedAt = jsonObject.getString("updated_at");
-                String language = jsonObject.getString("language");
-            
-                return GithubRepository.builder()
-                    .id(Integer.parseInt(id))
-                    .repoName(repoName)
-                    .repoUrl(repoUrl)
-                    .description(description)
-                    .createdAt(LocalDateTime.parse(createdAt))
-                    .updatedAt(LocalDateTime.parse(updatedAt))
-                    .language(language)
-                    .build();
+                JSONArray jsonArray = new JSONArray(str);
+                List<GithubRepository> gitHubRepositories = new ArrayList<GithubRepository>();
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    System.out.println(jsonObject.toString());
+                    
+                    Integer id = jsonObject.getInt("id");
+                    String repoName = this.getFromJsonObject(jsonObject, "name");
+                    String repoUrl = this.getFromJsonObject(jsonObject, "html_url");
+                    String description = this.getFromJsonObject(jsonObject, "description");
+                    String createdAt = this.getFromJsonObject(jsonObject, "created_at");
+                    String updatedAt = this.getFromJsonObject(jsonObject, "updated_at");
+                    String language = this.getFromJsonObject(jsonObject, "language");
+
+                    LocalDateTime createdDT = null, updatedDT = null;
+
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                        createdDT = sdf.parse(createdAt).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                        updatedDT = sdf.parse(updatedAt).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    }
+                    catch(ParseException e) {
+                        e.printStackTrace();
+                    }
+                    
+                
+                    GithubRepository currentRepository = GithubRepository.builder()
+                        .id(id)
+                        .repoName(repoName)
+                        .repoUrl(repoUrl)
+                        .description(description)
+                        .createdAt(createdDT)
+                        .updatedAt(updatedDT)
+                        .language(language)
+                        .build();
+
+                    gitHubRepositories.add(currentRepository);
+                };
+
+                return gitHubRepositories;
             })
-            .subscribe(gitHubRepository -> {
-                gitHubRepositoryRepository.save(gitHubRepository);
+            .subscribe(gitHubRepositories -> {
+                for (int i = 0; i < gitHubRepositories.size(); i++) {
+                    GithubRepository gitHubRepository = gitHubRepositories.get(i);
+                    gitHubRepositoryRepository.save(gitHubRepository);
+                }
             });
+    }
+
+    private String getFromJsonObject(JSONObject jsonObject, String key) {
+        return jsonObject.isNull(key) ? "" : jsonObject.getString(key);
     }
 
     @Override
