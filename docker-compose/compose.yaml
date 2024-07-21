@@ -30,6 +30,8 @@ services:
       - mynetwork
     depends_on:
       - redis
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials
 
 volumes:
   jenkins_home:

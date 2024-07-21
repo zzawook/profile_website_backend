@@ -55,8 +55,6 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    System.out.println(jsonObject.toString());
-                    
                     Integer id = jsonObject.getInt("id");
                     String repoName = this.getFromJsonObject(jsonObject, "name");
                     String repoUrl = this.getFromJsonObject(jsonObject, "html_url");
@@ -74,6 +72,7 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
                     }
                     catch(ParseException e) {
                         e.printStackTrace();
+                        continue;
                     }
                     
                 
