@@ -28,6 +28,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: profile-website
-          file: ./profile_website_backend/profile-website/Dockerfile
+          file: ./profile-website/Dockerfile
           push: true
           tags: kjaehyeok21/profile_website:latest
