@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,17 +17,13 @@ import dev.kjaehyeok21.profile_website.entities.GithubRepository;
 import dev.kjaehyeok21.profile_website.mappers.GithubRepositoryMapper;
 import dev.kjaehyeok21.profile_website.models.GetGithubRepositoryHolder;
 import dev.kjaehyeok21.profile_website.repositories.GitHubRepositoryRepository;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class GithubRepositoryServiceImpl implements GithubRepositoryService{
 
-    @Autowired
-    GitHubRepositoryRepository gitHubRepositoryRepository;
+    private final GitHubRepositoryRepository gitHubRepositoryRepository;
 
-    @Autowired
-    GithubRepositoryMapper githubRepositoryMapper;
+    private final GithubRepositoryMapper githubRepositoryMapper;
 
     public GithubRepositoryServiceImpl(GitHubRepositoryRepository gitHubRepositoryRepository, GithubRepositoryMapper githubRepositoryMapper) {
         this.gitHubRepositoryRepository = gitHubRepositoryRepository;

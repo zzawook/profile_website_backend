@@ -7,6 +7,9 @@ services:
       - 8080:8080
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    user: root
     networks:
       - mynetwork
     restart: always
@@ -15,8 +18,6 @@ services:
     build:
       context: ./redis
       dockerfile: Dockerfile
-    environment:
-      REDIS_ARGS: "--requirepass password --user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* allcommands --user default off nopass nocommands"
     ports:
       - 6379:6379
     networks:
