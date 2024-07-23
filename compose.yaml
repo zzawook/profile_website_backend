@@ -15,8 +15,10 @@ services:
     build:
       context: ./redis
       dockerfile: Dockerfile
+    environment:
+      REDIS_ARGS: "--requirepass password --user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* allcommands --user default off nopass nocommands"
     ports:
-      - 6380:6379
+      - 6379:6379
     networks:
       - mynetwork
     restart: always
@@ -29,6 +31,7 @@ services:
       - mynetwork
     depends_on:
       - redis
+      - mysql
     volumes:
       - $HOME/.aws/credentials:/root/.aws/credentials
     restart: always
@@ -43,9 +46,10 @@ services:
       - mynetwork
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_USER=${MYSQL_USERNAME}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DB_NAME}
 
 volumes:
   jenkins_home:

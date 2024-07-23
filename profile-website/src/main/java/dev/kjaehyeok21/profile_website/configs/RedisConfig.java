@@ -27,7 +27,7 @@ public class RedisConfig {
     public RedisConfig(AwsSecretsManagerService awsSecretsManagerService) {
         try {
             this.port = Integer.parseInt(awsSecretsManagerService.getSecret("redis_port"));
-            this.username = awsSecretsManagerService.getSecret("redis_client-name");
+            this.username = awsSecretsManagerService.getSecret("redis_client_name");
             this.password = awsSecretsManagerService.getSecret("redis_password");
         }
         catch(Exception e) {
