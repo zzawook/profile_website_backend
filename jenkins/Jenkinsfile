@@ -7,28 +7,20 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/zzawook/profile_website_backend.git'
             }
         }
-
-        stage('Clear Docker Data') {
-            steps {
-                sh 'docker stop $(docker ps -aq)'
-                sh 'docker rm $(docker ps -aq)'
-                sh 'docker rmi $(docker images -q)'
-            }
-        }
-
-        stage('Run get_mysql_secret.sh') {
-            steps {
-                dir('profile_website_backend') {
-                    sh './get_mysql_secret.sh'
-                }
-            }
-        }
         
         stage('Build and run Docker Compose') {
             steps {
                 dir('profile_website_backend') {
-                    sh 'docker-compose up -d'
+                    sh './terminate_application.sh'
+                    sh './run_application.sh'
                 }
+            }
+        }
+
+        stage("Finish") {
+            steps {
+                sh 'sudo docker images -qf dangling=true | xargs -I{} sudo docker rmi -f {}'
+                sh 'sudo docker system prune -af'
             }
         }
     }
