@@ -19,7 +19,7 @@ services:
       - redis
       - mysql
     volumes:
-      - $HOME/.aws/credentials:/root/.aws/credentials
+      - $HOME/.aws:/root/.aws
     restart: always
 
   mysql:

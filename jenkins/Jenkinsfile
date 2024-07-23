@@ -4,7 +4,10 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/zzawook/profile_website_backend.git'
+                // Git clone must be in profile_website_backend directory so that docker compose can find the running application with prefix "profile_website_backend" and terminate/resume with consistent name
+                dir('profile_website_backend') { 
+                    git branch: 'main', url: 'https://github.com/zzawook/profile_website_backend.git'
+                }
             }
         }
         
@@ -19,8 +22,8 @@ pipeline {
 
         stage("Finish") {
             steps {
-                sh 'sudo docker images -qf dangling=true | xargs -I{} sudo docker rmi -f {}'
-                sh 'sudo docker system prune -af'
+                sh 'docker images -qf dangling=true | xargs -I{} docker rmi -f {}'
+                sh 'docker system prune -af'
             }
         }
     }
