@@ -11,8 +11,6 @@
         - "/var/run/docker.sock:/var/run/docker.sock"
         - "/usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose"
         - "/usr/local/aws-cli:/usr/local/aws-cli"
-        - type: bind
-          source: $HOME/.aws
-          target: /root/.aws
+        - "$HOME/.aws:/root/.aws"
       user: root
       restart: always
