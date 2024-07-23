@@ -10,10 +10,10 @@ services:
     restart: always
 
   spring-server:
-    image: kjaehyeok21/profile_website:latest
-    # build:
-    #   context: ./profile-website
-    #   dockerfile: Dockerfile
+    # image: kjaehyeok21/profile_website:latest
+    build:
+      context: ./profile-website
+      dockerfile: Dockerfile
     ports:
       - 8081:8080
     networks:
