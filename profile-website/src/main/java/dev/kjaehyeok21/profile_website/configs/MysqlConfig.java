@@ -35,7 +35,7 @@ public class MysqlConfig {
         try {
             this.username = awsSecretsManagerService.getSecret("mysql_username");
             this.password = awsSecretsManagerService.getSecret("mysql_password");
-            this.dbName = awsSecretsManagerService.getSecret("mysql_db-name");
+            this.dbName = awsSecretsManagerService.getSecret("mysql_db_name");
         }
         catch(Exception e) {
             e.printStackTrace();

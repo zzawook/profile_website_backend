@@ -28,5 +28,5 @@ RUN chmod +x target/profile-website-*.jar
 RUN ls target
 
 # Run the Spring Boot application with dev profile
-ENTRYPOINT ["java", "-jar", "/app/profile-website/target/profile-website-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=dev_remote"]
+ENTRYPOINT ["java", "-jar", "/app/profile-website/target/profile-website-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=dev_localmysql"]
 # ENTRYPOINT ["tail", "-f", "/dev/null"]

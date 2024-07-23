@@ -9,6 +9,7 @@ services:
       - ./jenkins/jenkins_home:/var/jenkins_home
     networks:
       - mynetwork
+    restart: always
 
   redis:
     build:
@@ -18,6 +19,7 @@ services:
       - 6380:6379
     networks:
       - mynetwork
+    restart: always
 
   spring-server:
     image: kjaehyeok21/profile_website
@@ -29,6 +31,21 @@ services:
       - redis
     volumes:
       - $HOME/.aws/credentials:/root/.aws/credentials
+    restart: always
+
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    ports:
+      - 3306:3306
+    networks:
+      - mynetwork
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
 volumes:
   jenkins_home:
