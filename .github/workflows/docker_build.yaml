@@ -31,3 +31,12 @@ jobs:
           file: ./profile-website/Dockerfile
           push: true
           tags: kjaehyeok21/profile_website:latest
+
+      - name: Trigger jenkins job
+        uses: joshlk/jenkins-githubaction@master
+        with:
+          url: https://13.250.4.92:8080
+          job_name: profile_website
+          username: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          timeout: "1000"
