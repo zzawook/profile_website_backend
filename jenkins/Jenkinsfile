@@ -10,8 +10,6 @@ pipeline {
             }
         }
         
-        
-        
         stage('Terminate docker compose') {
             steps {
                 dir('profile_website_backend') {
