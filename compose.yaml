@@ -23,7 +23,7 @@ services:
       - mysql
     volumes:
       # - ${HOME}/.aws:/root/.aws
-      - /root/.aws:/root/.aws
+      - /ubuntu/.aws:/root/.aws
       - ./gitignore:/root/.gitignore
     restart: always
 
