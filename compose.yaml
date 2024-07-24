@@ -22,8 +22,8 @@ services:
       - redis
       - mysql
     volumes:
-      - ${HOME}/.aws:/root/.aws
-      # - /root/.aws:/root/.aws
+      # - ${HOME}/.aws:/root/.aws
+      - /root/.aws:/root/.aws
       - ./gitignore:/root/.gitignore
     restart: always
 

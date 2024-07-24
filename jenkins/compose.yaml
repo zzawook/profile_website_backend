@@ -14,8 +14,8 @@ services:
       - "$HOME/.aws:/root/.aws"
     user: root
     restart: always
-    network:
-      kjaehyeok21_network
+    networks:
+      - kjaehyeok21_network
 
 networks:
   kjaehyeok21_network:
