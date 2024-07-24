@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    
     stages {
         stage('Clone repository') {
             steps {
@@ -11,11 +10,12 @@ pipeline {
             }
         }
         
-        stage('Build and run Docker Compose') {
+        
+        
+        stage('Terminate docker compose') {
             steps {
                 dir('profile_website_backend') {
-                    sh './terminate_application.sh'
-                    sh './run_application.sh'
+                    sh './jenkins_restart_application.sh'
                 }
             }
         }
