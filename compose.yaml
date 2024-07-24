@@ -6,7 +6,7 @@ services:
     ports:
       - 6379:6379
     networks:
-      - mynetwork
+      - kjaehyeok21_network
     restart: always
 
   spring-server:
@@ -17,7 +17,7 @@ services:
     ports:
       - 8081:8080
     networks:
-      - mynetwork
+      - kjaehyeok21_network
     depends_on:
       - redis
       - mysql
@@ -34,7 +34,7 @@ services:
     ports:
       - 3306:3306
     networks:
-      - mynetwork
+      - kjaehyeok21_network
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
@@ -46,4 +46,6 @@ volumes:
   jenkins_home:
 
 networks:
-  mynetwork:
+  kjaehyeok21_network:
+    external: true
+    name: kjaehyeok21_network

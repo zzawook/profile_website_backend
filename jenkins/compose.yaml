@@ -1,16 +1,23 @@
-  services:
-    jenkins:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      ports:
-        - 8080:8080
-      volumes:
-        - ./jenkins_home:/var/jenkins_home
-        - "/usr/bin/docker:/usr/bin/docker"
-        - "/var/run/docker.sock:/var/run/docker.sock"
-        - "/usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose"
-        - "/usr/local/aws-cli:/usr/local/aws-cli"
-        - "$HOME/.aws:/root/.aws"
-      user: root
-      restart: always
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose"
+      - "/usr/local/aws-cli:/usr/local/aws-cli"
+      - "$HOME/.aws:/root/.aws"
+    user: root
+    restart: always
+    network:
+      kjaehyeok21_network
+
+networks:
+  kjaehyeok21_network:
+    external: true
+    name: kjaehyeok21_network

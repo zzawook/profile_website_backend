@@ -4,4 +4,5 @@
 
 echo ${HOME}
 
+docker network create kjaehyeok21_network --subnet=172.18.0.0/24
 docker compose up -d --build
