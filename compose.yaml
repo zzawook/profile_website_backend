@@ -10,10 +10,10 @@ services:
     restart: always
 
   spring-server:
-    # image: kjaehyeok21/profile_website:latest
-    build:
+    # image: kjaehyeok21/profile_website:latest #FOR PRODUCTION
+    build:  # FOR DEVELOPMENT (INSTANT STARTUP)
       context: ./profile-website
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile 
     ports:
       - 8081:8080
     networks:
@@ -22,9 +22,7 @@ services:
       - redis
       - mysql
     volumes:
-      # - ${HOME}/.aws:/root/.aws
-      - /home/kjaehyeok21/.aws:/root/.aws
-      - ./gitignore:/root/.gitignore
+      - ${AWS_DIRECTORY}:/root/.aws
     restart: always
 
   mysql:
@@ -47,5 +45,3 @@ volumes:
 
 networks:
   kjaehyeok21_network:
-    external: true
-    name: kjaehyeok21_network

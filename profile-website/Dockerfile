@@ -20,16 +20,10 @@ RUN ./mvnw clean package -Dmaven.test.skip
 
 # Expose the port on which the Spring Boot application will run
 EXPOSE 8080
-EXPOSE 22
-
-RUN pwd
 
 RUN chmod +x target/profile-website-*.jar
 
 RUN ls target
 
-RUN mkdir /root/.aws
-
 # Run the Spring Boot application with dev profile
-# ENTRYPOINT ["java", "-jar", "/app/profile-website/target/profile-website-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=dev_localmysql"]
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["java", "-jar", "/app/profile-website/target/profile-website-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=dev_localmysql"]

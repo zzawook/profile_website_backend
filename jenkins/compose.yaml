@@ -14,10 +14,5 @@ services:
       - "$HOME/.aws:/root/.aws"
     user: root
     restart: always
-    networks:
-      - kjaehyeok21_network
-
-networks:
-  kjaehyeok21_network:
-    external: true
-    name: kjaehyeok21_network
+    environment:
+      - AWS_DIRECTORY=${HOME}/.aws
