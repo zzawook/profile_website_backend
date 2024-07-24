@@ -20,6 +20,7 @@ RUN ./mvnw clean package -Dmaven.test.skip
 
 # Expose the port on which the Spring Boot application will run
 EXPOSE 8080
+EXPOSE 22
 
 RUN pwd
 
