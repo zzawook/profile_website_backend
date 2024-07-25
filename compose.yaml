@@ -39,6 +39,8 @@ services:
       - MYSQL_USER=${MYSQL_USERNAME}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DB_NAME}
+    volumes:
+      - ${AWS_DIRECTORY}:/root/.aws
 
 volumes:
   jenkins_home:
