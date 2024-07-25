@@ -1,0 +1,1 @@
+aws s3 cp --recursive s3://kjaehyeok21/jenkins_home ./jenkins_home
