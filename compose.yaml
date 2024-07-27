@@ -15,7 +15,7 @@ services:
     #   context: ./profile-website
     #   dockerfile: Dockerfile 
     ports:
-      - 8081:8080
+      - 8080:8080
     networks:
       - kjaehyeok21_network
     depends_on:
@@ -41,6 +41,19 @@ services:
       - MYSQL_DATABASE=${MYSQL_DB_NAME}
     volumes:
       - ${AWS_DIRECTORY}:/root/.aws
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - kjaehyeok21_network
+    restart: always
+    depends_on:
+      - spring-server
 
 volumes:
   jenkins_home:
