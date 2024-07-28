@@ -35,7 +35,7 @@ jobs:
       - name: Trigger jenkins job
         uses: joshlk/jenkins-githubaction@master
         with:
-          url: http://kjaehyeok21.dev:8081
+          url: https://kjaehyeok21.dev:8081
           job_name: profile_website
           username: ${{ secrets.JENKINS_USER }}
           api_token: ${{ secrets.JENKINS_TOKEN }}
