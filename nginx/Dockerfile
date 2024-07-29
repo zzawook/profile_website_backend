@@ -1,4 +1,8 @@
-FROM nginx
+FROM kjaehyeok21/profile_website_web
+
+RUN apt-get update && apt-get -y upgrade
+# Install nginx, certbot
+RUN apt-get install -y nginx
 
 # Copy nginx config file, initialization script
 COPY nginx.conf /etc/nginx/nginx.conf
