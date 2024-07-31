@@ -12,7 +12,6 @@ public class Resume {
 
     S3Client s3Client;
 
-    // @Value("${spring.cloud.aws.s3.bucket}")
     private final String bucket = "kjaehyeok21";
 
     URL url;

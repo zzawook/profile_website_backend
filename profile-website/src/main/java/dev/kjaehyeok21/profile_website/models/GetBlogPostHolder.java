@@ -22,7 +22,9 @@ public class GetBlogPostHolder {
     @NotBlank
     @Size(max = 512)
     private String title;
-    private String markdownContent;
+    private String subtitle;
+
+    private String url;
 
     @CreatedDate
     private LocalDateTime createdAt;

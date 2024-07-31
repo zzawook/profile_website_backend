@@ -44,7 +44,6 @@ public class MysqlConfig {
 
     @Bean
     ConnectionFactory connectionFactory() {
-        System.out.println(ZoneId.systemDefault().getId());
         return ConnectionFactoryBuilder.withOptions(
                 ConnectionFactoryOptions.builder()
                         .option(ConnectionFactoryOptions.DRIVER, "mysql")

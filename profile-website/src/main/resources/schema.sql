@@ -2,8 +2,10 @@ DROP TABLE IF EXISTS blog_posts;
 
 CREATE TABLE blog_posts (
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    medium_id VARCHAR(255) NOT NULL DEFAULT "",
     title VARCHAR(255) NOT NULL,
-    markdown_content TEXT,
+    subtitle TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    url TEXT
 );

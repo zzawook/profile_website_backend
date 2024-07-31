@@ -47,13 +47,15 @@ public class InjectTestData implements CommandLineRunner {
 
     private void populateBlogPostData() {
         BlogPost blogPost1 = BlogPost.builder()
-                .markdownContent("SAMPLE MARK DOWN CONTENT1")
+                .subtitle("SAMPLE MARK DOWN CONTENT1")
                 .title("SAMPLE BLOG POST 1")
+                .url("SOMEURL1")
                 .build();
 
         BlogPost blogPost2 = BlogPost.builder()
                 .title("SAMPLE BLOGG POST 2")
-                .markdownContent("SAMPLE MARK DOWN CONTENT2")
+                .subtitle("SAMPLE MARK DOWN CONTENT2")
+                .url("SOMEURL2")
                 .build();
 
         blogPostRepository.save(blogPost1).subscribe();

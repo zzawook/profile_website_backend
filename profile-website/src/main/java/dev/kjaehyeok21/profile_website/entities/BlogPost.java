@@ -25,8 +25,12 @@ public class BlogPost {
     @Id
     private Integer id;
 
+    private String mediumId;
+
     private String title;
-    private String markdownContent;
+    private String subtitle;
+
+    private String url;
 
     @CreatedDate
     private LocalDateTime createdAt;

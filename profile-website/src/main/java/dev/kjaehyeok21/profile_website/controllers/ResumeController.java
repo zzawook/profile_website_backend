@@ -36,7 +36,6 @@ public class ResumeController {
     // @RequestMapping(method = RequestMethod.POST, path = RESUME_DEFAULT_PATH)
     // public Mono<Void> postResume(ServerWebExchange exchange) {
     //     return exchange.getMultipartData().flatMap((MultiValueMap data) -> {
-    //         System.out.println(data);
 
     //         return Mono.empty();
     //     });
