@@ -2,7 +2,6 @@ package dev.kjaehyeok21.profile_website.configs;
 
 
 import java.time.Duration;
-import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.r2dbc.ConnectionFactoryBuilder;
