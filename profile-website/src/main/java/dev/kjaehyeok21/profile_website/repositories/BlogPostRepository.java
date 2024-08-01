@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface BlogPostRepository extends ReactiveCrudRepository<BlogPost, Integer>{
 
-    Mono<String> findByMediumId(String articleId);
+    Mono<BlogPost> findByMediumId(String articleId);
     
 }

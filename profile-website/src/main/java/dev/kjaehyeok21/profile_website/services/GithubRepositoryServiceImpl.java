@@ -34,6 +34,7 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
 
     @Scheduled(cron = "0 0 0 * * ?")
     private void fetchGithubRepositoryDataDaily() {
+        System.out.println("Running fetchGithubRepositoryDataDaily");
         this.fetchGithubRepositoryDataFromGithub();
     }
 
@@ -44,6 +45,7 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
             .retrieve()
             .bodyToMono(String.class)
             .map(str -> {
+                System.out.println(str);
                 JSONArray jsonArray = new JSONArray(str);
                 List<GithubRepository> gitHubRepositories = new ArrayList<GithubRepository>();
 
@@ -90,6 +92,7 @@ public class GithubRepositoryServiceImpl implements GithubRepositoryService{
                     GithubRepository gitHubRepository = gitHubRepositories.get(i);
                     gitHubRepositoryRepository.save(gitHubRepository);
                 }
+                gitHubRepositoryRepository.findAll().forEach(System.out::println);
             });
     }
 

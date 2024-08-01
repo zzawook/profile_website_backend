@@ -62,7 +62,7 @@ public class BlogPostServiceImpl implements BlogPostService{
         return this.user_id.length() > 0 && this.api_key.length() > 0;
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 4 * * ?")
     private void fetchBlogPostDataDaily() {
         this.fetchBlogPostData();
     }
