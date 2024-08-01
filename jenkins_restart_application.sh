@@ -1,5 +1,3 @@
-
-
 ./scripts/initialize.sh
 
 echo "AWS_DIRECTORY=${AWS_DIRECTORY}" >> .env
