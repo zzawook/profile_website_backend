@@ -11,7 +11,7 @@ public class AuthServiceImpl implements AuthService {
 
     public AuthServiceImpl(AwsSecretsManagerService awsSecretsManagerService) {
         try {
-            this.secret = awsSecretsManagerService.getSecret("auth_password");
+            this.secret = awsSecretsManagerService.getSecret("admin_password");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error fetching Auth Password");
