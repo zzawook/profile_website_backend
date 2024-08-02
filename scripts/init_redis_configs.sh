@@ -4,3 +4,4 @@ echo "REDIS_PASSWORD=$(aws secretsmanager get-secret-value --secret-id /kjaehyeo
 rm -rf ./redis/redis.conf
 cp ./redis/boilerplate.conf ./redis/redis.conf
 printf "\nuser $(aws secretsmanager get-secret-value --secret-id /kjaehyeok21_profile_website/spring_secrets | jq -r '.SecretString | fromjson | .redis_client_name') on +@all ~* >$(aws secretsmanager get-secret-value --secret-id /kjaehyeok21_profile_website/spring_secrets | jq -r '.SecretString | fromjson | .redis_password')" >> ./redis/redis.conf
+printf "\nrequirepass $(aws secretsmanager get-secret-value --secret-id /kjaehyeok21_profile_website/spring_secrets | jq -r '.SecretString | fromjson | .redis_password')" >> ./redis/redis.conf
